@@ -1,4 +1,4 @@
-package com.challenge;
+package challenge;
 
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;

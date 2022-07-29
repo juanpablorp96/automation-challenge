@@ -1,4 +1,4 @@
-package com.challenge;
+package challenge;
 
 import io.cucumber.junit.Cucumber;
 import io.cucumber.junit.CucumberOptions;
@@ -8,7 +8,7 @@ import org.junit.runner.RunWith;
 @CucumberOptions(
         tags = "@Run",
         plugin = {"pretty"},
-        features = {"./src/test/resources/com.challenge/features"})
+        features = {"./src/test/resources/challenge/features"})
 public class RunCucumberTest {
 
 }
