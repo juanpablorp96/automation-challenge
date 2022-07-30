@@ -17,7 +17,14 @@ public class StrangerListPage extends BasePage{
     @FindBy(css = "button.btn-success")
     private WebElement createItemButton;
 
-    private final String fileName = "stranger-things-will-byers.jpg";
+    @FindBy(xpath = "//button[text()='Edit']")
+    private WebElement editButton;
+
+    @FindBy(xpath = "//button[text()='Update Item']")
+    private WebElement updateItemButton;
+
+    @FindBy(css = "p.story")
+    private WebElement itemText;
     private int itemsNumber;
 
     public StrangerListPage(WebDriver webDriver) {
@@ -25,7 +32,7 @@ public class StrangerListPage extends BasePage{
         webDriver.get("http://immense-hollows-74271.herokuapp.com/");
     }
 
-    public void selectImage(){
+    public void selectImage(String fileName){
         getWebDriverWait().until(ExpectedConditions.visibilityOf(inputImage));
         File file = new File(fileName);
         String absolutePath = file.getAbsolutePath();
@@ -34,6 +41,7 @@ public class StrangerListPage extends BasePage{
 
     public void fillTextField(String itemText){
         getWebDriverWait().until(ExpectedConditions.visibilityOf(textField));
+        textField.clear();
         textField.sendKeys(itemText);
     }
 
@@ -43,7 +51,7 @@ public class StrangerListPage extends BasePage{
         createItemButton.click();
     }
 
-    public boolean isNewItemPresent(String itemText){
+    public boolean isNewItemPresent(String itemText, String fileName){
         int newItemIndex = itemsNumber + 1;
         try {
             getWebDriverWait().until(ExpectedConditions.numberOfElementsToBe(By.cssSelector("p.story"), newItemIndex));
@@ -53,5 +61,20 @@ public class StrangerListPage extends BasePage{
         }catch(TimeoutException timeoutException){
             return false;
         }
+    }
+
+    public void clickEditButton(){
+        getWebDriverWait().until(ExpectedConditions.elementToBeClickable(editButton));
+        editButton.click();
+    }
+
+    public void clickUpdateItemButton(){
+        getWebDriverWait().until(ExpectedConditions.elementToBeClickable(updateItemButton));
+        updateItemButton.click();
+    }
+
+    public String getItemText(){
+        getWebDriverWait().until(ExpectedConditions.visibilityOf(itemText));
+        return itemText.getText();
     }
 }
