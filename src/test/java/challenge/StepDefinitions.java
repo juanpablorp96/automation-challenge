@@ -52,4 +52,28 @@ public class StepDefinitions {
         Assert.assertEquals(strangerListPage.getItemText(), expectedItemText);
     }
 
+    @When("I click on the delete button of item {string}")
+    public void iClickOnDeleteButton(String itemText) throws Exception {
+        strangerListPage.clickDeleteButton(itemText);
+    }
+
+    @When("I click on the yes, delete it! button")
+    public void iClickOnTheYesDeleteItButton() {
+        strangerListPage.clickConfirmDeleteButton();
+    }
+
+    @Then("I should not see the item with text {string}")
+    public void iShouldNotSeeTheItemWithText(String itemText){
+        Assert.assertFalse(strangerListPage.isItemPresent(itemText));
+    }
+
+    @And("I check the number of items")
+    public void iCheckTheNumberOfItems() {
+        strangerListPage.checkNumberOfItems();
+    }
+
+    @Then("I should see one less item")
+    public void iShouldSeeOneLessItem() {
+        strangerListPage.verifyOneLessItem();
+    }
 }

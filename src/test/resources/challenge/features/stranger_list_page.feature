@@ -4,6 +4,7 @@ Feature: Stranger List
 
   Scenario Outline: Verify item creation
     Given I am in the Stranger List home page
+    And I check the number of items
     When I select the image "<item image>"
     And I fill the text field with "<item text>"
     And I click on the create item button
@@ -21,3 +22,14 @@ Feature: Stranger List
     Examples:
       | item text   |
       | Edited text |
+
+  Scenario Outline: Verify delete item
+    Given I am in the Stranger List home page
+    And I check the number of items
+    When I click on the delete button of item "<item text>"
+    And I click on the yes, delete it! button
+    Then I should see one less item
+    And I should not see the item with text "<item text>"
+    Examples:
+      | item text           |
+      | automation new item |
