@@ -76,4 +76,13 @@ public class StepDefinitions {
     public void iShouldSeeOneLessItem() {
         strangerListPage.verifyOneLessItem();
     }
+
+    @Then("^I should see the create item button (enabled|disabled)$")
+    public void iShouldSeeTheCreateItemButtonEnabled(String buttonState) {
+        if(buttonState.equals("enabled")){
+            Assert.assertTrue(strangerListPage.isButtonEnabled());
+        }else {
+            Assert.assertFalse(strangerListPage.isButtonEnabled());
+        }
+    }
 }

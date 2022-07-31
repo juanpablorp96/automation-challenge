@@ -110,4 +110,10 @@ public class StrangerListPage extends BasePage{
     public void verifyOneLessItem(){
         getWebDriverWait().until(ExpectedConditions.numberOfElementsToBe(By.cssSelector("li.media"), itemsNumber - 1));
     }
+
+    public boolean isButtonEnabled(){
+        getWebDriverWait().until(ExpectedConditions.visibilityOf(createItemButton));
+        System.out.println(createItemButton.isEnabled());
+        return createItemButton.isEnabled();
+    }
 }

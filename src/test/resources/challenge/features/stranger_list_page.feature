@@ -33,3 +33,21 @@ Feature: Stranger List
     Examples:
       | item text           |
       | automation new item |
+
+  Scenario Outline: Verify max long in description (valid input)
+    Given I am in the Stranger List home page
+    When I fill the text field with "<item text>"
+    Then I should see the create item button enabled
+    Examples:
+      | item text                                                                                                                                                                                                                                                                                                    |
+      # 300 char long
+      | aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa |
+
+  Scenario Outline: Verify max long in description (invalid input)
+    Given I am in the Stranger List home page
+    When I fill the text field with "<item text>"
+    Then I should see the create item button disabled
+    Examples:
+      | item text                                                                                                                                                                                                                                                                                                     |
+      # 301 char long
+      | aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa |
