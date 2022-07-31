@@ -21,6 +21,8 @@ public class StrangerListPage extends BasePage{
     private WebElement updateItemButton;
     @FindBy(css = "p.story")
     private WebElement itemText;
+    @FindBy(css = "p.story")
+    private List<WebElement> listItemText;
     @FindBy(css = "li.media")
     private List<WebElement> itemContainer;
     @FindBy(xpath = "//button[text()='Delete']")
@@ -38,6 +40,7 @@ public class StrangerListPage extends BasePage{
         getWebDriverWait().until(ExpectedConditions.visibilityOf(inputImage));
         File file = new File(fileName);
         String absolutePath = file.getAbsolutePath();
+        inputImage.clear();
         inputImage.sendKeys(absolutePath);
     }
 
@@ -49,18 +52,6 @@ public class StrangerListPage extends BasePage{
 
     public void clickCreateItem(){
         clickElement(createItemButton);
-    }
-
-    public boolean isNewItemPresent(String itemText, String fileName){
-        int newItemIndex = itemsNumber + 1;
-        try {
-            getWebDriverWait().until(ExpectedConditions.numberOfElementsToBe(By.cssSelector("li.media"), newItemIndex));
-            getWebDriverWait().until(ExpectedConditions.textToBePresentInElementLocated(By.xpath(String.format("(//p)[%s]", newItemIndex)), itemText));
-            getWebDriverWait().until(ExpectedConditions.attributeContains(By.xpath(String.format("(//figure/img)[%s]", newItemIndex)), "src", fileName));
-            return true;
-        }catch(TimeoutException timeoutException){
-            return false;
-        }
     }
 
     public void clickEditButton(){
@@ -93,19 +84,32 @@ public class StrangerListPage extends BasePage{
         clickElement(confirmDeleteButton);
     }
 
-    public boolean isItemPresent(String itemText){
-        getWebDriverWait().until(ExpectedConditions.visibilityOfAllElements(itemContainer));
-        for(WebElement item : itemContainer) {
-            if (item.findElement(By.cssSelector("p.story")).getText().equals(itemText)) {
+    public boolean isItemPresent(String expectedItemText){
+        getWebDriverWait().until(ExpectedConditions.visibilityOfAllElements(listItemText));
+        for(WebElement itemText : listItemText) {
+            if (itemText.getText().equals(expectedItemText)) {
                 return true;
             }
         }
         return false;
     }
 
+    public boolean isImagePresent(String fileName) {
+        try{
+            getWebDriverWait().until(ExpectedConditions.visibilityOfElementLocated(By.xpath(String.format("//li//figure/img[contains(@src,'%s')]", fileName))));
+            return true;
+        }catch (TimeoutException timeoutException){
+            return false;
+        }
+    }
+
     public void checkNumberOfItems(){
         getWebDriverWait().until(ExpectedConditions.visibilityOfAllElements(itemContainer));
         itemsNumber = itemContainer.size();
+    }
+
+    public void verifyOneMoreItem(){
+        getWebDriverWait().until(ExpectedConditions.numberOfElementsToBe(By.cssSelector("li.media"), itemsNumber + 1));
     }
 
     public void verifyOneLessItem(){

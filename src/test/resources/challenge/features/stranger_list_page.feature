@@ -8,7 +8,9 @@ Feature: Stranger List
     When I select the image "<item image>"
     And I fill the text field with "<item text>"
     And I click on the create item button
-    Then I should see the item created with text "<item text>" and image "<item image>"
+    Then I should see one more item
+    And I should see the item with text "<item text>"
+    And I should see the item with image "<item image>"
     Examples:
       | item text           | item image                     |
       | automation new item | stranger-things-will-byers.jpg |
@@ -58,3 +60,14 @@ Feature: Stranger List
     Examples:
       | item text                                                                                                                                                                                                                                                                                                     |
       | Creators: Matt Duffer, Ross Duffer |
+
+  # Bug 1
+  Scenario Outline: Verify image can be edited
+    Given I am in the Stranger List home page
+    When I click on edit button
+    And I select the image "<item image>"
+    And I click on the update item button
+    Then I should see the item with image "<item image>"
+    Examples:
+      | item image          |
+      | stranger-things.jpg |

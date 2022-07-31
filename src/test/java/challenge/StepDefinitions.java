@@ -1,6 +1,7 @@
 package challenge;
 
 import challenge.pages.StrangerListPage;
+import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
@@ -34,11 +35,6 @@ public class StepDefinitions {
         }else {
             strangerListPage.clickUpdateItemButton();
         }
-    }
-
-    @Then("I should see the item created with text {string} and image {string}")
-    public void iShouldSeeTheItemCreatedWithTextAndImage(String itemText, String itemImage) {
-        Assert.assertTrue("Item does not exist", strangerListPage.isNewItemPresent(itemText, itemImage));
     }
 
     @When("I click on edit button")
@@ -75,9 +71,13 @@ public class StepDefinitions {
         strangerListPage.checkNumberOfItems();
     }
 
-    @Then("I should see one less item")
-    public void iShouldSeeOneLessItem() {
-        strangerListPage.verifyOneLessItem();
+    @Then("^I should see one (more|less) item$")
+    public void iShouldSeeOneLessItem(String listState) {
+        if(listState.equals("more")){
+            strangerListPage.verifyOneMoreItem();
+        }else {
+            strangerListPage.verifyOneLessItem();
+        }
     }
 
     @Then("^I should see the create item button (enabled|disabled)$")
@@ -88,4 +88,10 @@ public class StepDefinitions {
             Assert.assertFalse(strangerListPage.isButtonEnabled());
         }
     }
+
+    @Then("I should see the item with image {string}")
+    public void iShouldSeeTheItemWithImage(String fileName) {
+        Assert.assertTrue(strangerListPage.isImagePresent(fileName));
+    }
+
 }
