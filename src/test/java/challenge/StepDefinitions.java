@@ -1,7 +1,6 @@
 package challenge;
 
 import challenge.pages.StrangerListPage;
-import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
@@ -62,12 +61,16 @@ public class StepDefinitions {
         strangerListPage.clickConfirmDeleteButton();
     }
 
-    @Then("I should not see the item with text {string}")
-    public void iShouldNotSeeTheItemWithText(String itemText){
-        Assert.assertFalse(strangerListPage.isItemPresent(itemText));
+    @Then("^I (should|should not) see the item with text \"([^\"]*)\"$")
+    public void iShouldNotSeeTheItemWithText(String present, String itemText){
+        if(present.equals("should")){
+            Assert.assertTrue(strangerListPage.isItemPresent(itemText));
+        }else {
+            Assert.assertFalse(strangerListPage.isItemPresent(itemText));
+        }
     }
 
-    @And("I check the number of items")
+    @Given("I check the number of items")
     public void iCheckTheNumberOfItems() {
         strangerListPage.checkNumberOfItems();
     }

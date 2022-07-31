@@ -51,3 +51,10 @@ Feature: Stranger List
       | item text                                                                                                                                                                                                                                                                                                     |
       # 301 char long
       | aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa |
+
+  Scenario Outline: Verify item exist
+    Given I am in the Stranger List home page
+    Then I should see the item with text "<item text>"
+    Examples:
+      | item text                                                                                                                                                                                                                                                                                                     |
+      | Creators: Matt Duffer, Ross Duffer |

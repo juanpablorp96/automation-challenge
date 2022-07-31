@@ -94,6 +94,7 @@ public class StrangerListPage extends BasePage{
     }
 
     public boolean isItemPresent(String itemText){
+        getWebDriverWait().until(ExpectedConditions.visibilityOfAllElements(itemContainer));
         for(WebElement item : itemContainer) {
             if (item.findElement(By.cssSelector("p.story")).getText().equals(itemText)) {
                 return true;
@@ -113,7 +114,6 @@ public class StrangerListPage extends BasePage{
 
     public boolean isButtonEnabled(){
         getWebDriverWait().until(ExpectedConditions.visibilityOf(createItemButton));
-        System.out.println(createItemButton.isEnabled());
         return createItemButton.isEnabled();
     }
 }
