@@ -108,16 +108,30 @@ public class StrangerListPage extends BasePage{
         itemsNumber = itemContainer.size();
     }
 
-    public void verifyOneMoreItem(){
-        getWebDriverWait().until(ExpectedConditions.numberOfElementsToBe(By.cssSelector("li.media"), itemsNumber + 1));
+    public boolean isOneMoreItem(){
+        try{
+            getWebDriverWait().until(ExpectedConditions.numberOfElementsToBe(By.cssSelector("li.media"), itemsNumber + 1));
+            return true;
+        }catch (TimeoutException timeoutException){
+            return false;
+        }
     }
 
-    public void verifyOneLessItem(){
-        getWebDriverWait().until(ExpectedConditions.numberOfElementsToBe(By.cssSelector("li.media"), itemsNumber - 1));
+    public boolean isOneLessItem(){
+        try{
+            getWebDriverWait().until(ExpectedConditions.numberOfElementsToBe(By.cssSelector("li.media"), itemsNumber - 1));
+            return true;
+        }catch (TimeoutException timeoutException){
+            return false;
+        }
     }
 
     public boolean isButtonEnabled(){
         getWebDriverWait().until(ExpectedConditions.visibilityOf(createItemButton));
         return createItemButton.isEnabled();
+    }
+
+    public String getAlertMessage(){
+        return getWebDriver().switchTo().alert().getText();
     }
 }

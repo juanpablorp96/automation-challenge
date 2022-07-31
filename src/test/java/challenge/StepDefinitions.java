@@ -1,7 +1,6 @@
 package challenge;
 
 import challenge.pages.StrangerListPage;
-import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
@@ -74,9 +73,9 @@ public class StepDefinitions {
     @Then("^I should see one (more|less) item$")
     public void iShouldSeeOneLessItem(String listState) {
         if(listState.equals("more")){
-            strangerListPage.verifyOneMoreItem();
+            Assert.assertTrue(strangerListPage.isOneMoreItem());
         }else {
-            strangerListPage.verifyOneLessItem();
+            Assert.assertTrue(strangerListPage.isOneLessItem());
         }
     }
 
@@ -92,6 +91,11 @@ public class StepDefinitions {
     @Then("I should see the item with image {string}")
     public void iShouldSeeTheItemWithImage(String fileName) {
         Assert.assertTrue(strangerListPage.isImagePresent(fileName));
+    }
+
+    @Then("I should see an alert with the message {string}")
+    public void iShouldSeeAnAlertWithTheMessage(String alertMessage) {
+        Assert.assertEquals(strangerListPage.getAlertMessage(), alertMessage);
     }
 
 }

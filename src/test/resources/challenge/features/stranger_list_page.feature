@@ -71,3 +71,19 @@ Feature: Stranger List
     Examples:
       | item image          |
       | stranger-things.jpg |
+
+  # Bug 2
+  Scenario Outline: Verify image input is clear after item creation
+    Given I am in the Stranger List home page
+    And I check the number of items
+    And I select the image "<item image>"
+    And I fill the text field with "<item text>"
+    And I click on the create item button
+    And I should see one more item
+    When I fill the text field with "<item text>"
+    And I click on the create item button
+    Then I should see an alert with the message "<alert message>"
+
+    Examples:
+      | item text           | item image                     | alert message               |
+      | automation new item | stranger-things-will-byers.jpg | You must to select an image |
