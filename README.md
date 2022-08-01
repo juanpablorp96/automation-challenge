@@ -15,7 +15,6 @@ fixed
 
 |                      | __BUG #1__                                                                                                                                                                |
 |----------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| __Issue type__       | Bug                                                                                                                                                                       |
 | __Summary__          | When editing the image for an existing item it is not being saved                                                                                                         |
 | __Product__          | Stranger List                                                                                                                                                             |
 | __Env__              | Test                                                                                                                                                                      |
@@ -27,7 +26,6 @@ fixed
 
 |                      | __BUG #2__                                                                                                                                          |
 |----------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------|
-| __Issue type__       | Bug                                                                                                                                                 |
 | __Summary__          | Image input is not clear after item creation                                                                                                        |
 | __Product__          | Stranger List                                                                                                                                       |
 | __Env__              | Test                                                                                                                                                |
@@ -39,7 +37,6 @@ fixed
 
 |                      | __BUG #3__                                                                                                                                        |
 |----------------------|---------------------------------------------------------------------------------------------------------------------------------------------------|
-| __Issue type__       | Bug                                                                                                                                               |
 | __Summary__          | Item action buttons are not visible when the description is too long                                                                              |
 | __Product__          | Stranger List                                                                                                                                     |
 | __Env__              | Test                                                                                                                                              |
