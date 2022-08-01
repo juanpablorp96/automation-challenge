@@ -83,7 +83,22 @@ Feature: Stranger List
     When I fill the text field with "<item text>"
     And I click on the create item button
     Then I should see an alert with the message "<alert message>"
-
     Examples:
       | item text           | item image                     | alert message               |
       | automation new item | stranger-things-will-byers.jpg | You must to select an image |
+
+  # Bug 3
+  Scenario Outline: Verify edit/delete button are visible with long description
+    Given I am in the Stranger List home page
+    And I check the number of items
+    When I select the image "<item image>"
+    And I fill the text field with "<item text>"
+    And I click on the create item button
+    And I should see one more item
+    And I should see the item with text "<item text>"
+    Then I should see the Edit button in the item "<item text>"
+    And I should see the Delete button in the item "<item text>"
+    Examples:
+      | item image                     | item text                                                                                                                                                                                                                                                                                                     |
+                                         # 300 char long
+      | stranger-things-will-byers.jpg | aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa |

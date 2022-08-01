@@ -134,4 +134,20 @@ public class StrangerListPage extends BasePage{
     public String getAlertMessage(){
         return getWebDriver().switchTo().alert().getText();
     }
+
+    public boolean isActionButtonVisible(String button, String itemText){
+        try{
+            getWebDriverWait().until(ExpectedConditions.visibilityOfAllElements(itemContainer));
+            for(WebElement item : itemContainer){
+                if(item.findElement(By.cssSelector("p.story")).getText().equals(itemText)){
+                    int itemIndex = itemContainer.indexOf(item);
+                    getWebDriverWait().until(ExpectedConditions.visibilityOfElementLocated(By.xpath(String.format("(//button[text()='%s'])[%d]", button, itemIndex + 1))));
+                    return true;
+                }
+            }
+        }catch (TimeoutException timeoutException){
+            return false;
+        }
+        return false;
+    }
 }

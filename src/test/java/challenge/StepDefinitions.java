@@ -98,4 +98,9 @@ public class StepDefinitions {
         Assert.assertEquals(strangerListPage.getAlertMessage(), alertMessage);
     }
 
+    @Then("^I should see the (Edit|Delete) button in the item \"([^\"]*)\"$")
+    public void iShouldSeeTheEditButtonInTheItem(String button, String itemText) {
+        Assert.assertTrue(strangerListPage.isActionButtonVisible(button, itemText));
+    }
+
 }
