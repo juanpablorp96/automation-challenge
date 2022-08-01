@@ -131,8 +131,12 @@ public class StrangerListPage extends BasePage{
         return createItemButton.isEnabled();
     }
 
-    public String getAlertMessage(){
-        return getWebDriver().switchTo().alert().getText();
+    public boolean isAlertMessage(String message){
+        try{
+            return getWebDriver().switchTo().alert().getText().equals(message);
+        }catch (NoAlertPresentException noAlertPresentException){
+            return false;
+        }
     }
 
     public boolean isActionButtonVisible(String button, String itemText){

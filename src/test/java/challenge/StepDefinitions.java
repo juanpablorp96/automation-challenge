@@ -43,7 +43,7 @@ public class StepDefinitions {
 
     @Then("I should see the item updated with text {string}")
     public void iShouldSeeTheItemUpdatedWithText(String expectedItemText) {
-        Assert.assertEquals(strangerListPage.getItemText(), expectedItemText);
+        Assert.assertEquals("The item was not updated successfully", strangerListPage.getItemText(), expectedItemText);
     }
 
     @When("I click on the delete button of item {string}")
@@ -59,9 +59,9 @@ public class StepDefinitions {
     @Then("^I (should|should not) see the item with text \"([^\"]*)\"$")
     public void iShouldNotSeeTheItemWithText(String present, String itemText){
         if(present.equals("should")){
-            Assert.assertTrue(strangerListPage.isItemPresent(itemText));
+            Assert.assertTrue("Item is not present", strangerListPage.isItemPresent(itemText));
         }else {
-            Assert.assertFalse(strangerListPage.isItemPresent(itemText));
+            Assert.assertFalse("Item is present", strangerListPage.isItemPresent(itemText));
         }
     }
 
@@ -73,34 +73,34 @@ public class StepDefinitions {
     @Then("^I should see one (more|less) item$")
     public void iShouldSeeOneLessItem(String listState) {
         if(listState.equals("more")){
-            Assert.assertTrue(strangerListPage.isOneMoreItem());
+            Assert.assertTrue("There is not exactly one more item", strangerListPage.isOneMoreItem());
         }else {
-            Assert.assertTrue(strangerListPage.isOneLessItem());
+            Assert.assertTrue("There is not exactly one less item", strangerListPage.isOneLessItem());
         }
     }
 
     @Then("^I should see the create item button (enabled|disabled)$")
     public void iShouldSeeTheCreateItemButtonEnabled(String buttonState) {
         if(buttonState.equals("enabled")){
-            Assert.assertTrue(strangerListPage.isButtonEnabled());
+            Assert.assertTrue("The button is disabled", strangerListPage.isButtonEnabled());
         }else {
-            Assert.assertFalse(strangerListPage.isButtonEnabled());
+            Assert.assertFalse("The button is enabled", strangerListPage.isButtonEnabled());
         }
     }
 
     @Then("I should see the item with image {string}")
     public void iShouldSeeTheItemWithImage(String fileName) {
-        Assert.assertTrue(strangerListPage.isImagePresent(fileName));
+        Assert.assertTrue("There is not an item with the given image", strangerListPage.isImagePresent(fileName));
     }
 
     @Then("I should see an alert with the message {string}")
     public void iShouldSeeAnAlertWithTheMessage(String alertMessage) {
-        Assert.assertEquals(strangerListPage.getAlertMessage(), alertMessage);
+        Assert.assertTrue("There is not an alert with the given message", strangerListPage.isAlertMessage(alertMessage));
     }
 
     @Then("^I should see the (Edit|Delete) button in the item \"([^\"]*)\"$")
     public void iShouldSeeTheEditButtonInTheItem(String button, String itemText) {
-        Assert.assertTrue(strangerListPage.isActionButtonVisible(button, itemText));
+        Assert.assertTrue("The button is not visible", strangerListPage.isActionButtonVisible(button, itemText));
     }
 
 }

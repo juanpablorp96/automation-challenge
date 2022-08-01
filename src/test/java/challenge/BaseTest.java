@@ -10,7 +10,7 @@ public class BaseTest {
 
     @Before
     public void beforeSuite(){
-        driver = new Driver("chrome");
+        driver = new Driver(System.getProperty("browser"));
     }
 
     @After
